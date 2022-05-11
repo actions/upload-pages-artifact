@@ -11,7 +11,6 @@ runs:
     - name: Archive build output
       run: "tar --dereference --hard-dereference --directory ${{ inputs.directory }} -cvf artifact.tar ."
       shell: bash
-      working-directory: "/workspace"
     - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
