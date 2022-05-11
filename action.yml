@@ -1,7 +1,7 @@
 name: 'Upload Pages artifact'
 description: 'A composite action that prepares your static assets to be deployed to GitHub Pages'
 inputs:
-  directory:  # id of input
+  directory:
     description: 'The directory in your workspace that contains the built assets'
     required: true
     default: '_site/'
