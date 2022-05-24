@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  test:
+  draft-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
