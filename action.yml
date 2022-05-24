@@ -14,7 +14,7 @@ runs:
   steps:
     - name: Archive artifact
       shell: bash
-      run: -|
+      run: |
         tar \
           --dereference --hard-dereference \
           --directory ${{ inputs.path }} \
