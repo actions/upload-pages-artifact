@@ -1,2 +1,20 @@
-# upload-pages-artifact
-Composite action to package and upload an artifact that can be deployed to GitHub Pages
+# Upload-Pages-Artifact
+
+A composite action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
+
+# Scope
+
+⚠️ Official support for building Pages with Actions is in public beta at the moment. The scope is currently limited to **public repositories only**.
+
+# Usage
+
+See [action.yml](action.yml)
+
+<!-- TODO: document custom workflow -->
+
+# License
+
+The scripts and documentation in this project are released under the [MIT License](LICENSE).
+
+<!-- references -->
+[pages]: https://pages.github.com
