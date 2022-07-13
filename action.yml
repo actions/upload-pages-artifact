@@ -20,6 +20,7 @@ runs:
           --directory ${{ inputs.path }} \
           -cvf ${{ runner.temp }}/artifact.tar \
           --exclude=.git \
+          --exclude=.github \
           .
     - name: Upload artifact
       uses: actions/upload-artifact@main
