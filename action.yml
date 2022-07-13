@@ -1,14 +1,14 @@
-name: 'Upload Pages artifact'
-description: 'A composite action that prepares your static assets to be deployed to GitHub Pages'
+name: "Upload Pages artifact"
+description: "A composite action that prepares your static assets to be deployed to GitHub Pages"
 inputs:
   path:
-    description: 'Path of the directoring containing the static assets.'
+    description: "Path of the directoring containing the static assets."
     required: true
-    default: '_site/'
+    default: "_site/"
   retention-days:
-    description: 'Duration after which artifact will expire in days.'
+    description: "Duration after which artifact will expire in days."
     required: false
-    default: '1'
+    default: "1"
 runs:
   using: composite
   steps:
