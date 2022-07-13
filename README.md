@@ -4,13 +4,27 @@ A composite action for packaging and uploading artifact that can be deployed to 
 
 # Scope
 
-⚠️ Official support for building Pages with Actions is in public beta at the moment. The scope is currently limited to **public repositories only**.
+⚠️ Official support for building Pages with Actions is in public beta at the moment.
 
 # Usage
 
 See [action.yml](action.yml)
 
 <!-- TODO: document custom workflow -->
+
+# Artifact validation
+
+While using this action is optional, we highly recommend it since it takes care of producing (mostly) valid artifacts.
+
+A Pages artifact must:
+
+- Be called `github-pages`
+- Be a single [`gzip` archive][gzip] containing a single [`tar` file][tar]
+
+The [`tar` file][tar] must:
+
+- be under 10GB in size
+- not contain any symbolic or hard links
 
 # Release instructions
 
@@ -37,3 +51,5 @@ The scripts and documentation in this project are released under the [MIT Licens
 [pages]: https://pages.github.com
 [draft-release]: .github/workflows/draft-release.yml
 [release]: .github/workflows/release.yml
+[gzip]: https://en.wikipedia.org/wiki/Gzip
+[tar]: https://en.wikipedia.org/wiki/Tar_(computing)
