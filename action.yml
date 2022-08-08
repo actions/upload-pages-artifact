@@ -14,10 +14,23 @@ runs:
   steps:
     - name: Archive artifact
       shell: bash
-      if: runner.os != 'Windows'
+      if: runner.os == 'Linux'
       run: |
         tar \
           --dereference --hard-dereference \
+          --directory ${{ inputs.path }} \
+          -cvf ${{ runner.temp }}/artifact.tar \
+          --exclude=.git \
+          --exclude=.github \
+          .
+
+    # Remove the --hard-dereference option for macOS only
+    - name: Archive artifact
+      shell: bash
+      if: runner.os == 'macOS'
+      run: |
+        tar \
+          --dereference \
           --directory ${{ inputs.path }} \
           -cvf ${{ runner.temp }}/artifact.tar \
           --exclude=.git \
