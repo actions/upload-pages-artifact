@@ -24,13 +24,13 @@ runs:
           --exclude=.github \
           .
 
-    # Remove the --hard-dereference option for macOS only
+    # Switch to gtar (GNU tar instead of bsdtar which is the default in the MacOS runners so we can use --hard-dereference)
     - name: Archive artifact
       shell: bash
       if: runner.os == 'macOS'
       run: |
-        tar \
-          --dereference \
+        gtar \
+          --dereference --hard-dereference \
           --directory ${{ inputs.path }} \
           -cvf ${{ runner.temp }}/artifact.tar \
           --exclude=.git \
