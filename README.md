@@ -1,6 +1,6 @@
 # upload-pages-artifact
 
-A composite action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
+A composite Action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
 
 # Scope
 
@@ -30,18 +30,13 @@ The [`tar` file][tar] must:
 
 In order to release a new version of this Action:
 
-1. Locate the semantic version of the upcoming release (a draft is maintained by the [`draft-release` workflow][draft-release])
+1. Locate the semantic version of the [upcoming release][release-list] (a draft is maintained by the [`draft-release` workflow][draft-release]).
 
-2. Push a matching tag, for instance for `v0.1.0`:
+2. Publish the draft release from the `main` branch with semantic version as the tag name, _with_ the checkbox to publish to the GitHub Marketplace checked. :ballot_box_with_check:
 
-   ```bash
-   git tag v0.1.0
-   git push origin v0.1.0
-   ```
+3. After publishing the release, the [`release` workflow][release] will automatically run to create/update the corresponding the major version tag such as `v0`.
 
-3. Publish the draft release (the major tag such as `v0` will be created/updated by the [`release` workflow][release])
-
-   ⚠️ Environment approval is required.
+   ⚠️ Environment approval is required. Check the [Release workflow run list][release-workflow-runs].
 
 # License
 
@@ -49,7 +44,9 @@ The scripts and documentation in this project are released under the [MIT Licens
 
 <!-- references -->
 [pages]: https://pages.github.com
+[release-list]: /releases
 [draft-release]: .github/workflows/draft-release.yml
 [release]: .github/workflows/release.yml
+[release-workflow-runs]: /actions/workflows/release.yml
 [gzip]: https://en.wikipedia.org/wiki/Gzip
 [tar]: https://en.wikipedia.org/wiki/Tar_(computing)
