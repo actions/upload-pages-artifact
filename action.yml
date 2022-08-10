@@ -1,4 +1,4 @@
-name: "Upload Pages artifact"
+name: "Upload GitHub Pages artifact"
 description: "A composite action that prepares your static assets to be deployed to GitHub Pages"
 inputs:
   path:
