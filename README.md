@@ -1,4 +1,4 @@
-# Upload-Pages-Artifact
+# upload-pages-artifact
 
 A composite action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
 
