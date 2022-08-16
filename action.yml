@@ -10,6 +10,10 @@ inputs:
     description: "Duration after which artifact will expire in days."
     required: false
     default: "1"
+  temp-directory:
+    description: "The directory to create the archive in."
+    required: false
+    default: ${{ runner.temp }}
 runs:
   using: composite
   steps:
@@ -19,8 +23,8 @@ runs:
       run: |
         tar \
           --dereference --hard-dereference \
-          --directory ${{ inputs.path }} \
-          -cvf ${{ runner.temp }}/artifact.tar \
+          --directory "${{ inputs.path }}" \
+          -cvf "${{ inputs.temp-directory }}/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
           .
@@ -32,8 +36,8 @@ runs:
       run: |
         gtar \
           --dereference --hard-dereference \
-          --directory ${{ inputs.path }} \
-          -cvf ${{ runner.temp }}/artifact.tar \
+          --directory "${{ inputs.path }}" \
+          -cvf "${{ inputs.temp-directory }}/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
           .
@@ -46,7 +50,7 @@ runs:
         tar \
           --dereference --hard-dereference \
           --directory "${{ inputs.path }}" \
-          -cvf "${{ runner.temp }}\artifact.tar" \
+          -cvf "${{ inputs.temp-directory }}\artifact.tar" \
           --exclude=.git \
           --exclude=.github \
           --force-local \
@@ -56,5 +60,5 @@ runs:
       uses: actions/upload-artifact@main
       with:
         name: github-pages
-        path: ${{ runner.temp }}/artifact.tar
+        path: ${{ inputs.temp-directory }}/artifact.tar
         retention-days: ${{ inputs.retention-days }}
