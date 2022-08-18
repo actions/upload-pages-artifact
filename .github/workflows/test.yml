@@ -22,7 +22,7 @@ jobs:
       shell: bash
 
     - name: Upload artifacts
-      uses: .
+      uses: ./
       with:
         path: artifact
 
