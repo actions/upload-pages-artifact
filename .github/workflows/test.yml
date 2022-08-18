@@ -33,7 +33,7 @@ jobs:
           path: artifact2
 
     - name: Extract artifacts
-      run: tar --force-local -xf artifact2/artifact.tar -C artifact2 && rm artifact2/artifact.tar
+      run: tar -xf artifact2/artifact.tar -C artifact2 && rm artifact2/artifact.tar
       shell: bash
 
     - name: Compare artifacts
