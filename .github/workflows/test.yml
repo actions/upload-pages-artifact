@@ -1,0 +1,37 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Generate artifacts
+      run: mkdir artifact && mkdir artifact2 && cd artifact && ../script/new-artifact.sh
+      shell: bash
+
+    - name: Upload artifacts
+      uses: .
+      with:
+        path: artifact
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+          name: github-pages
+          path: artifact2
+
+    - name: Compare artifacts
+      run: diff -qr artifact artifact2
+      shell: bash
