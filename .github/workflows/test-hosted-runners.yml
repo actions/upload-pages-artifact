@@ -1,5 +1,12 @@
 name: Run Tests
 
+#
+# Create some files with script/new-artifact.sh and confirm they are properly packaged and uploaded
+# as artifacts with the actions.
+#
+# This is tested on all OS platforms where we have hosted runners.
+#
+
 on:
   push:
     branches:
