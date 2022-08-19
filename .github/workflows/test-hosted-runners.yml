@@ -28,7 +28,7 @@ jobs:
       run: mkdir artifact && mkdir artifact2 && cd artifact && ../script/new-artifact.sh
       shell: bash
 
-    - name: Upload artifact
+    - name: Upload Pages artifact
       uses: ./
       with:
         path: artifact
