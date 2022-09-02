@@ -26,7 +26,6 @@ runs:
           .
       env:
         INPUT_PATH: ${{ inputs.path }}
-        RUNNER_TEMP: ${{ runner.temp }}
 
     # Switch to gtar (GNU tar instead of bsdtar which is the default in the MacOS runners so we can use --hard-dereference)
     - name: Archive artifact
@@ -42,7 +41,6 @@ runs:
           .
       env:
         INPUT_PATH: ${{ inputs.path }}
-        RUNNER_TEMP: ${{ runner.temp }}
 
     # Massage the paths for Windows only
     - name: Archive artifact
@@ -59,7 +57,6 @@ runs:
           "."
       env:
         INPUT_PATH: ${{ inputs.path }}
-        RUNNER_TEMP: ${{ runner.temp }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@main
