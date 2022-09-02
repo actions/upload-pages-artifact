@@ -4,6 +4,8 @@
 echo 'hello' > hello.txt
 mkdir subdir
 echo 'world' > subdir/world.txt
+mkdir excludeddir
+echo 'excluded' > excludeddir/excluded.txt
 
 # Add some symlinks (which we should dereference properly when archiving)
 ln -s subdir subdir-link

@@ -6,6 +6,10 @@ inputs:
     description: "Path of the directory containing the static assets."
     required: true
     default: "_site/"
+  exclude:
+    description: "Pattern of exclude files from the assets."
+    required: false
+    default: ""
   retention-days:
     description: "Duration after which artifact will expire in days."
     required: false
@@ -23,6 +27,7 @@ runs:
           -cvf ${{ runner.temp }}/artifact.tar \
           --exclude=.git \
           --exclude=.github \
+          ${{ (inputs.exclude == '') && ' ' || format('--exclude {0}', inputs.exclude ) }} \
           .
 
     # Switch to gtar (GNU tar instead of bsdtar which is the default in the MacOS runners so we can use --hard-dereference)
@@ -36,6 +41,7 @@ runs:
           -cvf ${{ runner.temp }}/artifact.tar \
           --exclude=.git \
           --exclude=.github \
+          ${{ (inputs.exclude == '') && ' ' || format('--exclude {0}', inputs.exclude ) }} \
           .
 
     # Massage the paths for Windows only
@@ -49,6 +55,7 @@ runs:
           -cvf "${{ runner.temp }}\artifact.tar" \
           --exclude=.git \
           --exclude=.github \
+          ${{ (inputs.exclude == '') && ' ' || format('--exclude {0}', inputs.exclude ) }} \
           --force-local \
           "."
 

@@ -32,6 +32,11 @@ jobs:
       uses: ./
       with:
         path: artifact
+        exclude: ./excludeddir
+
+    - name: Remove exclude files
+      run: rm -rf artifact/excludeddir
+      shell: bash
 
     - name: Download artifact
       uses: actions/download-artifact@v3
