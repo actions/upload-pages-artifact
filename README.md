@@ -8,7 +8,17 @@ A composite Action for packaging and uploading artifact that can be deployed to 
 
 # Usage
 
-See [action.yml](action.yml)
+## Upload GitHub Pages artifact
+
+```yaml
+steps:
+  - name: Upload github-pages artifact
+    uses: actions/upload-pages-artifact@v1
+    with:
+      path: '.'
+      files: '*/**.html'
+```
+*path* must be a path to a directory, and *files* must be a valid glob pattern.
 
 <!-- TODO: document custom workflow -->
 
