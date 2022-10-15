@@ -3,9 +3,13 @@ description: "A composite action that prepares your static assets to be deployed
 author: "GitHub"
 inputs:
   path:
-    description: "Path of the directory containing the static assets."
+    description: "A directory containing the static assets."
     required: true
     default: "_site/"
+  files:
+    description: "A glob pattern describing the static assets."
+    required: false
+    default: "."
   retention-days:
     description: "Duration after which artifact will expire in days."
     required: false
@@ -17,46 +21,46 @@ runs:
       shell: bash
       if: runner.os == 'Linux'
       run: |
+        shopt -s globstar && \
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
           -cvf "$RUNNER_TEMP/artifact.tar" \
-          --exclude=.git \
-          --exclude=.github \
-          .
+          "$INPUT_FILES"
       env:
         INPUT_PATH: ${{ inputs.path }}
+        INPUT_FILES: ${{ inputs.files }}
 
     # Switch to gtar (GNU tar instead of bsdtar which is the default in the MacOS runners so we can use --hard-dereference)
     - name: Archive artifact
       shell: bash
       if: runner.os == 'macOS'
       run: |
+        shopt -s globstar && \
         gtar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
           -cvf "$RUNNER_TEMP/artifact.tar" \
-          --exclude=.git \
-          --exclude=.github \
-          .
+          "$INPUT_FILES"
       env:
         INPUT_PATH: ${{ inputs.path }}
+        INPUT_FILES: ${{ inputs.files }}
 
     # Massage the paths for Windows only
     - name: Archive artifact
       shell: bash
       if: runner.os == 'Windows'
       run: |
+        shopt -s globstar && \
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
           -cvf "$RUNNER_TEMP\artifact.tar" \
-          --exclude=.git \
-          --exclude=.github \
           --force-local \
-          "."
+          "$INPUT_FILES"
       env:
         INPUT_PATH: ${{ inputs.path }}
+        INPUT_FILES: ${{ inputs.files }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@main
