@@ -14,7 +14,7 @@ runs:
   using: composite
   steps:
     - name: Archive artifact
-      shell: bash
+      shell: sh
       if: runner.os == 'Linux'
       run: |
         tar \
@@ -29,7 +29,7 @@ runs:
 
     # Switch to gtar (GNU tar instead of bsdtar which is the default in the MacOS runners so we can use --hard-dereference)
     - name: Archive artifact
-      shell: bash
+      shell: sh
       if: runner.os == 'macOS'
       run: |
         gtar \
