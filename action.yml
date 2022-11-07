@@ -17,6 +17,7 @@ runs:
       shell: sh
       if: runner.os == 'Linux'
       run: |
+        chmod -R +r .
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
@@ -32,6 +33,7 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
+        chmod -R +r .
         gtar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
