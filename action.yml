@@ -36,7 +36,7 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
-        for f in $(gchmod -c -R +r . | awk '{print substr($3, 2, length($3)-2)}')
+        for f in $(chmod -v -R +r)
         do
           echo "::warning::Added read permission to $f"
         done
