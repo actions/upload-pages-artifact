@@ -17,6 +17,10 @@ runs:
       shell: sh
       if: runner.os == 'Linux'
       run: |
+        for f in $(chmod -c -R +r . | awk '{print substr($3, 2, length($3)-2)}')
+        do
+          echo "::warning::Added read permission to $f"
+        done
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
@@ -32,6 +36,10 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
+        for f in $(chmod -v -R +r .)
+        do
+          echo "::warning::Added read permission to $f"
+        done
         gtar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
