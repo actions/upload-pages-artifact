@@ -2,6 +2,10 @@ name: "Upload GitHub Pages artifact"
 description: "A composite action that prepares your static assets to be deployed to GitHub Pages"
 author: "GitHub"
 inputs:
+  name:
+    description: 'Artifact name'
+    required: false
+    default: 'github-pages'
   path:
     description: "Path of the directory containing the static assets."
     required: true
@@ -67,6 +71,6 @@ runs:
     - name: Upload artifact
       uses: actions/upload-artifact@main
       with:
-        name: github-pages
+        name: ${{ inputs.name }}
         path: ${{ runner.temp }}/artifact.tar
         retention-days: ${{ inputs.retention-days }}
