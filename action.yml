@@ -17,7 +17,7 @@ runs:
       shell: sh
       if: runner.os == 'Linux'
       run: |
-        chmod -c -R +r . | while read line; do
+        chmod -c -R +rX . | while read line; do
           echo "::warning title=Changed permissions on a file::$line"
         done
         tar \
@@ -35,7 +35,7 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
-        chmod -v -R +r . | while read line; do
+        chmod -v -R +rX . | while read line; do
           echo "::warning title=Changed permissions on a file::$line"
         done
         gtar \
