@@ -17,8 +17,8 @@ runs:
       shell: sh
       if: runner.os == 'Linux'
       run: |
-        chmod -c -R +r . | while read line; do
-          echo "::warning title=Changed permissions on a file::$line"
+        chmod -c -R +rX . | while read line; do
+          echo "::warning title=Invalid file permissions automatically fixed::$line"
         done
         tar \
           --dereference --hard-dereference \
@@ -35,8 +35,8 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
-        chmod -v -R +r . | while read line; do
-          echo "::warning title=Changed permissions on a file::$line"
+        chmod -v -R +rX . | while read line; do
+          echo "::warning title=Invalid file permissions automatically fixed::$line"
         done
         gtar \
           --dereference --hard-dereference \
