@@ -27,7 +27,7 @@ runs:
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
-          -cvf "$RUNNER_TEMP/artifact.tar" \
+          -cvf "${{ runner.temp }}/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
           .
@@ -45,7 +45,7 @@ runs:
         gtar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
-          -cvf "$RUNNER_TEMP/artifact.tar" \
+          -cvf "${{ runner.temp }}/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
           .
@@ -60,7 +60,7 @@ runs:
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
-          -cvf "$RUNNER_TEMP\artifact.tar" \
+          -cvf "${{ runner.temp }}\artifact.tar" \
           --exclude=.git \
           --exclude=.github \
           --force-local \
