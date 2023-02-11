@@ -44,7 +44,7 @@ The scripts and documentation in this project are released under the [MIT Licens
 
 <!-- references -->
 [pages]: https://pages.github.com
-[release-list]: /releases
+[release-list]: https://github.com/actions/upload-pages-artifact/releases
 [draft-release]: .github/workflows/draft-release.yml
 [release]: .github/workflows/release.yml
 [release-workflow-runs]: /actions/workflows/release.yml
