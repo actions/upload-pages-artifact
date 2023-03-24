@@ -74,3 +74,4 @@ runs:
         name: ${{ inputs.name }}
         path: ${{ runner.temp }}/artifact.tar
         retention-days: ${{ inputs.retention-days }}
+        if-no-files-found: error
