@@ -47,6 +47,6 @@ The scripts and documentation in this project are released under the [MIT Licens
 [release-list]: https://github.com/actions/upload-pages-artifact/releases
 [draft-release]: .github/workflows/draft-release.yml
 [release]: .github/workflows/release.yml
-[release-workflow-runs]: /actions/workflows/release.yml
+[release-workflow-runs]: https://github.com/actions/upload-pages-artifact/actions/workflows/release.yml
 [gzip]: https://en.wikipedia.org/wiki/Gzip
 [tar]: https://en.wikipedia.org/wiki/Tar_(computing)
