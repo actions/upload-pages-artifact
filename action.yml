@@ -21,9 +21,6 @@ runs:
       shell: sh
       if: runner.os == 'Linux'
       run: |
-        while read line; do
-          echo "::warning title=Invalid file permissions automatically fixed::$line"
-        done
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
@@ -39,9 +36,6 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
-        while read line; do
-          echo "::warning title=Invalid file permissions automatically fixed::$line"
-        done
         gtar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
