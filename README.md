@@ -26,6 +26,38 @@ The [`tar` file][tar] must:
 - be under 10GB in size
 - not contain any symbolic or hard links
 
+# File Permissions
+
+When using this action ensure your files have appropriate file permission, we expect at a minimum for the files to have permission for the current user (e.g 0744).
+Failure to do so will result in a `deployment_perms_error` when attempting to deploy your artifacts.
+
+```yaml
+...
+runs:
+  using: composite
+  steps:
+    - name: Archive artifact
+      shell: sh
+      if: runner.os == 'Linux'
+      run: |
+        chmod -c -R +rX "$INPUT_PATH" |
+        while read line; do
+           echo "::warning title=Invalid file permissions automatically fixed::$line"
+        done
+        tar \
+          --dereference --hard-dereference \
+          --directory "$INPUT_PATH" \
+          -cvf "$RUNNER_TEMP/artifact.tar" \
+          --exclude=.git \
+          --exclude=.github \
+          .
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+
+...
+```
+
+
 # Release instructions
 
 In order to release a new version of this Action:
