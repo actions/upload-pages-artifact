@@ -29,7 +29,7 @@ jobs:
           cd docs/
           make html
 
-      # Change path to link include index of your webpage
+      # Change path to include the index of your webpage
       - name: Upload your page as github pages artifact
         uses: actions/upload-pages-artifact@main
         with:
