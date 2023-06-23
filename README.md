@@ -28,7 +28,8 @@ The [`tar` file][tar] must:
 
 # File Permissions
 
-When using this action ensure your files have appropriate file permission, we expect at a minimum for the files to have permission for the current user (e.g 0744).
+When using this action, ensure that your files have appropriate file permissions.
+We expect, at a minimum, for the files to have read permission for the current user (e.g 0744).
 Failure to do so will result in a `deployment_perms_error` when attempting to deploy your artifacts.
 
 ```yaml
