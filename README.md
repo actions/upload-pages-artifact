@@ -23,7 +23,7 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v3
         
-      # Replace this step your own page build process
+      # Replace this step with your own page build process
       - name: Build your page
         run: |
           cd docs/
