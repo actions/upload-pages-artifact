@@ -29,7 +29,9 @@ The [`tar` file][tar] must:
 # File Permissions
 
 When using this action, ensure that your files have appropriate file permissions.
-We expect, at a minimum, for the files to have read permission for the current user (e.g 0744).
+At a minimum, GitHub Pages expects:
+- files to have read permission for the current user and the "Others" user role (e.g. `0744`, `0644`, `0444`)
+- directories to have read and execute permissions for the current user and the "Others" user role (e.g. `0755`, `0555`)
 Failure to do so will result in a `deployment_perms_error` when attempting to deploy your artifacts.
 
 ```yaml
