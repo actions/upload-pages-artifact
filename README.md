@@ -2,17 +2,17 @@
 
 A composite Action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
 
-# Scope
+## Scope
 
 ⚠️ Official support for building Pages with Actions is in public beta at the moment.
 
-# Usage
+## Usage
 
 See [action.yml](action.yml)
 
 <!-- TODO: document custom workflow -->
 
-# Artifact validation
+## Artifact validation
 
 While using this action is optional, we highly recommend it since it takes care of producing (mostly) valid artifacts.
 
@@ -25,8 +25,9 @@ The [`tar` file][tar] must:
 
 - be under 10GB in size
 - not contain any symbolic or hard links
+- contain only files and directories that all meet the expected minimum [file permissions](#file-permissions)
 
-# File Permissions
+### File permissions
 
 When using this action, ensure that your files have appropriate file permissions.
 At a minimum, GitHub Pages expects:
@@ -35,34 +36,37 @@ At a minimum, GitHub Pages expects:
 
 Failure to supply adequate permissions will result in a `deployment_perms_error` when attempting to deploy your artifacts to GitHub Pages.
 
-```yaml
-...
-runs:
-  using: composite
-  steps:
-    - name: Archive artifact
-      shell: sh
-      if: runner.os == 'Linux'
-      run: |
-        chmod -c -R +rX "$INPUT_PATH" |
-        while read line; do
-           echo "::warning title=Invalid file permissions automatically fixed::$line"
-        done
-        tar \
-          --dereference --hard-dereference \
-          --directory "$INPUT_PATH" \
-          -cvf "$RUNNER_TEMP/artifact.tar" \
-          --exclude=.git \
-          --exclude=.github \
-          .
-      env:
-        INPUT_PATH: ${{ inputs.path }}
+#### Example permissions fix for Linux
 
-...
+```yaml
+steps:
+# ...
+  - name: Fix permissions
+    run: |
+      chmod -c -R +rX "_site/" | while read line; do
+        echo "::warning title=Invalid file permissions automatically fixed::$line"
+      done
+  - name: Upload Pages artifact
+    uses: actions/upload-pages-artifact@v2
+# ...
 ```
 
+#### Example permissions fix for Mac
 
-# Release instructions
+```yaml
+steps:
+# ...
+  - name: Fix permissions
+    run: |
+      chmod -v -R +rX "_site/" | while read line; do
+        echo "::warning title=Invalid file permissions automatically fixed::$line"
+      done
+  - name: Upload Pages artifact
+    uses: actions/upload-pages-artifact@v2
+# ...
+```
+
+## Release instructions
 
 In order to release a new version of this Action:
 
@@ -74,7 +78,7 @@ In order to release a new version of this Action:
 
    ⚠️ Environment approval is required. Check the [Release workflow run list][release-workflow-runs].
 
-# License
+## License
 
 The scripts and documentation in this project are released under the [MIT License](LICENSE).
 
