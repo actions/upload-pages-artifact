@@ -14,16 +14,18 @@ See [action.yml](action.yml)
 
 ## Artifact validation
 
-While using this action is optional, we highly recommend it since it takes care of producing (mostly) valid artifacts.
+While choosing to use this action as part of your approach to deploying to GitHub Pages is technically optional, we highly recommend it since it takes care of producing (mostly) valid artifacts.
 
-A Pages artifact must:
+However, if you _**do not**_ choose to use this action but still want to deploy to Pages using an Actions workflow, then you must upload an Actions artifact that meets the following criteria:
 
-- Be called `github-pages`
+- Be named `github-pages`
 - Be a single [`gzip` archive][gzip] containing a single [`tar` file][tar]
 
 The [`tar` file][tar] must:
 
-- be under 10GB in size
+- be under 10GB in size (we recommend under 1 GB!)
+  - :warning: The GitHub Pages [officially supported maximum size limit is 1GB][pages-usage-limits], so the subsequent deployment of larger tarballs are not guaranteed to succeed &mdash; often because they are more prone to exceeding the maximum deployment timeout of 10 minutes.
+  - ⛔ However, there is also an _unofficial_ absolute maximum size limit of 10GB, which Pages will not even _attempt_ to deploy.
 - not contain any symbolic or hard links
 - contain only files and directories that all meet the expected minimum [file permissions](#file-permissions)
 
@@ -90,3 +92,4 @@ The scripts and documentation in this project are released under the [MIT Licens
 [release-workflow-runs]: https://github.com/actions/upload-pages-artifact/actions/workflows/release.yml
 [gzip]: https://en.wikipedia.org/wiki/Gzip
 [tar]: https://en.wikipedia.org/wiki/Tar_(computing)
+[pages-usage-limits]: https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#usage-limits
