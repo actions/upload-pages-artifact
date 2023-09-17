@@ -1,10 +1,10 @@
-#!/usr/bin/env sh
+#!/usr/bin/sh bash
 
 # Create some files and directories in the current folder
-echo 'hello' > hello.txt
+echo 'sigill' > user.txt
 mkdir subdir
-echo 'world' > subdir/world.txt
+echo 'sigkill' > subdir/
 
 # Add some symlinks (which we should dereference properly when archiving)
 ln -s subdir subdir-link
-ln -s hello.txt bonjour.txt
+ln -s user.txt my-dir
