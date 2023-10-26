@@ -31,6 +31,7 @@ jobs:
     - name: Upload Pages artifact
       uses: ./
       with:
+        name: pages-artifact ${{ matrix.os }}
         path: artifact
 
     - name: Download artifact
