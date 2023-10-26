@@ -14,6 +14,10 @@ inputs:
     description: "Duration after which artifact will expire in days."
     required: false
     default: "1"
+outputs:
+  artifact-id:
+    description: "The ID of the artifact that was uploaded."
+    value: ${{ steps.upload-artifact.outputs.artifact-id }}
 runs:
   using: composite
   steps:
@@ -63,7 +67,8 @@ runs:
         INPUT_PATH: ${{ inputs.path }}
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      id: upload-artifact
+      uses: actions/upload-artifact@v4-beta
       with:
         name: ${{ inputs.name }}
         path: ${{ runner.temp }}/artifact.tar
