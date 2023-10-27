@@ -15,7 +15,7 @@ inputs:
     required: false
     default: "1"
 outputs:
-  artifact-id:
+  artifact_id:
     description: "The ID of the artifact that was uploaded."
     value: ${{ steps.upload-artifact.outputs.artifact-id }}
 runs:
