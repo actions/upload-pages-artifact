@@ -31,13 +31,13 @@ jobs:
     - name: Upload Pages artifact
       uses: ./
       with:
-        name: pages-artifact ${{ matrix.os }}
+        name: pages-artifact-${{ matrix.os }}
         path: artifact
 
     - name: Download artifact
       uses: actions/download-artifact@v4-beta
       with:
-          name: pages-artifact ${{ matrix.os }}
+          name: pages-artifact-${{ matrix.os }}
           path: artifact2
 
     - name: Extract artifact
