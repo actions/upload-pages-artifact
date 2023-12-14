@@ -68,7 +68,7 @@ runs:
 
     - name: Upload artifact
       id: upload-artifact
-      uses: actions/upload-artifact@v4-beta
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.name }}
         path: ${{ runner.temp }}/artifact.tar
