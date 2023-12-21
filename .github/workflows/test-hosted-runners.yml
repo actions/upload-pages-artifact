@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Generate files
       run: mkdir artifact && mkdir artifact2 && cd artifact && ../script/new-artifact.sh
