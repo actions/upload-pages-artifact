@@ -25,6 +25,7 @@ runs:
       shell: sh
       if: runner.os == 'Linux'
       run: |
+        echo ::group::Archive artifact
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
@@ -32,6 +33,7 @@ runs:
           --exclude=.git \
           --exclude=.github \
           .
+        echo ::endgroup::
       env:
         INPUT_PATH: ${{ inputs.path }}
 
@@ -40,6 +42,7 @@ runs:
       shell: sh
       if: runner.os == 'macOS'
       run: |
+        echo ::group::Archive artifact
         gtar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
@@ -47,6 +50,7 @@ runs:
           --exclude=.git \
           --exclude=.github \
           .
+        echo ::endgroup::
       env:
         INPUT_PATH: ${{ inputs.path }}
 
@@ -55,6 +59,7 @@ runs:
       shell: bash
       if: runner.os == 'Windows'
       run: |
+        echo ::group::Archive artifact
         tar \
           --dereference --hard-dereference \
           --directory "$INPUT_PATH" \
@@ -63,6 +68,7 @@ runs:
           --exclude=.github \
           --force-local \
           "."
+        echo ::endgroup::
       env:
         INPUT_PATH: ${{ inputs.path }}
 
