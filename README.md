@@ -2,10 +2,6 @@
 
 A composite Action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
 
-## Scope
-
-⚠️ Official support for building Pages with Actions is in public beta at the moment.
-
 ## Usage
 
 See [action.yml](action.yml)
@@ -25,7 +21,7 @@ The [`tar` file][tar] must:
 
 - be under 10GB in size
 - not contain any symbolic or hard links
-- contain only files and directories that all meet the expected minimum [file permissions](#file-permissions)
+- contain only files and directories
 
 ## Release instructions
 
