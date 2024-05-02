@@ -2,10 +2,6 @@
 
 A composite Action for packaging and uploading artifact that can be deployed to [GitHub Pages][pages].
 
-## Scope
-
-⚠️ Official support for building Pages with Actions is in public beta at the moment.
-
 ## Usage
 
 See [action.yml](action.yml)
@@ -25,46 +21,7 @@ The [`tar` file][tar] must:
 
 - be under 10GB in size
 - not contain any symbolic or hard links
-- contain only files and directories that all meet the expected minimum [file permissions](#file-permissions)
-
-### File permissions
-
-When using this action, ensure that your files have appropriate file permissions.
-At a minimum, GitHub Pages expects:
-- files to have read permission for the current user and the "Others" user role (e.g. `0744`, `0644`, `0444`)
-- directories to have read and execute permissions for the current user and the "Others" user role (e.g. `0755`, `0555`)
-
-Failure to supply adequate permissions will result in a `deployment_perms_error` when attempting to deploy your artifacts to GitHub Pages.
-
-#### Example permissions fix for Linux
-
-```yaml
-steps:
-# ...
-  - name: Fix permissions
-    run: |
-      chmod -c -R +rX "_site/" | while read line; do
-        echo "::warning title=Invalid file permissions automatically fixed::$line"
-      done
-  - name: Upload Pages artifact
-    uses: actions/upload-pages-artifact@v3
-# ...
-```
-
-#### Example permissions fix for Mac
-
-```yaml
-steps:
-# ...
-  - name: Fix permissions
-    run: |
-      chmod -v -R +rX "_site/" | while read line; do
-        echo "::warning title=Invalid file permissions automatically fixed::$line"
-      done
-  - name: Upload Pages artifact
-    uses: actions/upload-pages-artifact@v3
-# ...
-```
+- contain only files and directories
 
 ## Release instructions
 
