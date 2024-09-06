@@ -32,7 +32,7 @@ runs:
           -cvf "$RUNNER_TEMP/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
-          --exclude=".*" \
+          --exclude=".[^/]*" \
           .
         echo ::endgroup::
       env:
@@ -50,7 +50,7 @@ runs:
           -cvf "$RUNNER_TEMP/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
-          --exclude=".*" \
+          --exclude=".[^/]*" \
           .
         echo ::endgroup::
       env:
@@ -68,7 +68,7 @@ runs:
           -cvf "$RUNNER_TEMP\artifact.tar" \
           --exclude=.git \
           --exclude=.github \
-          --exclude=".*" \
+          --exclude=".[^/]*" \
           --force-local \
           "."
         echo ::endgroup::
