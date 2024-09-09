@@ -46,7 +46,7 @@ jobs:
 
     - name: Compare files
       run: |
-        diff_output=$(diff -qr artifact artifact2 | grep -v -e '.hidden' -e 'subdir/.hidden_also')
+        diff_output=$(diff -qr artifact artifact2 | grep -v -e '.hidden')
         if [ -n "$diff_output" ]; then
           echo "Unexpected differences found:"
           echo "$diff_output"
