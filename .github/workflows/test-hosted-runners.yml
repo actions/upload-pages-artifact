@@ -45,13 +45,7 @@ jobs:
       shell: bash
 
     - name: Compare files
-      run: |
-        diff_output=$(diff -qr artifact artifact2 | grep -v -e '.hidden')
-        if [ -n "$diff_output" ]; then
-          echo "Unexpected differences found:"
-          echo "$diff_output"
-          exit 1
-        fi
+      run: diff -qr artifact artifact2
       shell: bash
 
     - name: Check for absence of symlinks
