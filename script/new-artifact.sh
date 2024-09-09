@@ -11,4 +11,3 @@ ln -s hello.txt bonjour.txt
 
 # Create some hidden files
 echo 'foo' > .hidden
-echo 'bar' > subdir/.hidden_also
