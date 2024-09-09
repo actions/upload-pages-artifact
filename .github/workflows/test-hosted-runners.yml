@@ -44,14 +44,16 @@ jobs:
       run: tar -xf artifact2/artifact.tar -C artifact2 && rm artifact2/artifact.tar
       shell: bash
 
+    - name: Check for absence of hidden files
+      run: if [ $(find artifact2 -regex ".*/\..*" | wc -l) != 0 ]; then echo "Hidden files found"; exit 1; fi
+      shell: bash
+
     - name: Compare files
-      run: diff -qr artifact artifact2
+      run: |
+        rm artifact/.hidden
+        diff -qr artifact artifact2
       shell: bash
 
     - name: Check for absence of symlinks
       run: if [ $(find artifact2 -type l | wc -l) != 0 ]; then echo "Symlinks found"; exit 1; fi
-      shell: bash
-
-    - name: Check for absence of hidden files
-      run: if [ $(find artifact2 -regex ".*/\..*" | wc -l) != 0 ]; then echo "Hidden files found"; exit 1; fi
       shell: bash
