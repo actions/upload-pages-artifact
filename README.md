@@ -6,7 +6,7 @@ A composite Action for packaging and uploading artifact that can be deployed to 
 
 See [action.yml](action.yml) for the various `inputs` this action supports (or [below](#inputs-📥)).
 
-We recommend this action to be used in the build job:
+If you breakdown your workflow in two jobs (`build` and `deploy`), we recommend this action to be used in your `build` job:
 
 ```yaml
 jobs:
