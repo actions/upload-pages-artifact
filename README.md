@@ -48,6 +48,7 @@ jobs:
 | `name`           | `false`   | `github-pages` | Artifact name                                      |
 | `path`           | `true`    | `_site/`       | Path of the directory containing the static assets |
 | `retention-days` | `false`   | `1`            | Duration after which artifact will expire in days  |
+| `overwrite`      | `false`   | `false`        | Whther the artifact should overwrite existing ones |
 
 ### Outputs 📤
 
