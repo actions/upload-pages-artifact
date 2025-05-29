@@ -4,9 +4,56 @@ A composite Action for packaging and uploading artifact that can be deployed to 
 
 ## Usage
 
-See [action.yml](action.yml)
+See [action.yml](action.yml) for the various `inputs` this action supports (or [below](#inputs-📥)).
 
-<!-- TODO: document custom workflow -->
+If you breakdown your workflow in two jobs (`build` and `deploy`), we recommend this action to be used in your `build` job:
+
+```yaml
+jobs:
+  # Build job
+  build:
+    # Specify runner +  build & upload the static files as an artifact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build static files
+        id: build
+        run: |
+          # <Not provided for brevity>
+          # At a minimum this step should build the static files of your site
+          # <Not provided for brevity>
+
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3 # or specific "vX.X.X" version tag for this action
+        with:
+          path: build_outputs_folder/
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### Inputs 📥
+
+| Input            | Required? | Default        | Description                                        |
+| ---------------- | --------- | -------------- | -------------------------------------------------- |
+| `name`           | `false`   | `github-pages` | Artifact name                                      |
+| `path`           | `true`    | `_site/`       | Path of the directory containing the static assets |
+| `retention-days` | `false`   | `1`            | Duration after which artifact will expire in days  |
+
+### Outputs 📤
+
+| Output        | Description                              |
+| ------------- | ---------------------------------------- |
+| `artifact_id` | The ID of the artifact that was uploaded |
 
 ## Artifact validation
 
@@ -33,7 +80,7 @@ In order to release a new version of this Action:
 
 2. Publish the draft release from the `main` branch with semantic version as the tag name, _with_ the checkbox to publish to the GitHub Marketplace checked. :ballot_box_with_check:
 
-3. After publishing the release, the [`release` workflow][release] will automatically run to create/update the corresponding the major version tag such as `v0`.
+3. After publishing the release, the [`release` workflow][release] will automatically run to create/update the corresponding major version tag such as `v0`.
 
    ⚠️ Environment approval is required. Check the [Release workflow run list][release-workflow-runs].
 
