@@ -96,4 +96,4 @@ The scripts and documentation in this project are released under the [MIT Licens
 [release-workflow-runs]: https://github.com/actions/upload-pages-artifact/actions/workflows/release.yml
 [gzip]: https://en.wikipedia.org/wiki/Gzip
 [tar]: https://en.wikipedia.org/wiki/Tar_(computing)
-[pages-usage-limits]: https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#usage-limits
+[pages-usage-limits]: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits#usage-limits
