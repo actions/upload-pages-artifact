@@ -9,5 +9,6 @@ echo 'world' > subdir/world.txt
 ln -s subdir subdir-link
 ln -s hello.txt bonjour.txt
 
-# Create some hidden files
+# Create some hidden files or folders
 echo 'foo' > .hidden
+mkdir -p .hidden2 && echo 'bar' > .hidden2/bar

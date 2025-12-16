@@ -25,7 +25,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Generate files
-      run: mkdir artifact && mkdir artifact2 && cd artifact && ../script/new-artifact.sh
+      run: mkdir artifact && mkdir artifact2 && cd artifact && ../script/new-artifact.sh && cd .. && cp -R artifact artifact3 && mkdir artifact4
       shell: bash
 
     - name: Upload Pages artifact
@@ -50,10 +50,32 @@ jobs:
 
     - name: Compare files
       run: |
-        rm artifact/.hidden
+        rm -r -f artifact/.hidden*
         diff -qr artifact artifact2
       shell: bash
 
     - name: Check for absence of symlinks
       run: if [ $(find artifact2 -type l | wc -l) != 0 ]; then echo "Symlinks found"; exit 1; fi
+      shell: bash
+
+    - name: Upload Pages artifact appended
+      uses: ./
+      with:
+        name: pages-artifact-appended-${{ matrix.os }}
+        path: artifact3
+        append-items: .hidden .hidden2
+        
+    - name: Download artifact appended
+      uses: actions/download-artifact@v4
+      with:
+          name: pages-artifact-appended-${{ matrix.os }}
+          path: artifact4
+
+    - name: Extract artifact appended
+      run: tar -xf artifact4/artifact.tar -C artifact4 && rm artifact4/artifact.tar
+      shell: bash
+
+    - name: Compare files appended
+      run: |
+        diff -qr artifact3 artifact4
       shell: bash
