@@ -57,3 +57,46 @@ jobs:
     - name: Check for absence of symlinks
       run: if [ $(find artifact2 -type l | wc -l) != 0 ]; then echo "Symlinks found"; exit 1; fi
       shell: bash
+
+  test-include-hidden:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Generate files
+      run: mkdir artifact && mkdir artifact2 && cd artifact && ../script/new-artifact.sh
+      shell: bash
+
+    - name: Upload Pages artifact
+      uses: ./
+      with:
+        name: pages-artifact-hidden-${{ matrix.os }}
+        path: artifact
+        include-hidden-files: true
+
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+          name: pages-artifact-hidden-${{ matrix.os }}
+          path: artifact2
+
+    - name: Extract artifact
+      run: tar -xf artifact2/artifact.tar -C artifact2 && rm artifact2/artifact.tar
+      shell: bash
+
+    - name: Check for presence of hidden files
+      run: if [ $(find artifact2 -regex ".*/\..*" | wc -l) == 0 ]; then echo "Hidden files not found"; exit 1; fi
+      shell: bash
+
+    - name: Compare files
+      run: diff -qr artifact artifact2
+      shell: bash
+
+    - name: Check for absence of symlinks
+      run: if [ $(find artifact2 -type l | wc -l) != 0 ]; then echo "Symlinks found"; exit 1; fi
+      shell: bash
