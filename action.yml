@@ -36,11 +36,12 @@ runs:
           -cvf "$RUNNER_TEMP/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
-          ${{ inputs.include-hidden-files != 'true' && '--exclude=.[^/]*' || '' }} \
+          $( [ "$INCLUDE_HIDDEN_FILES" != 'true' ] && echo '--exclude=.[^/]*' || echo '' ) \
           .
         echo ::endgroup::
       env:
         INPUT_PATH: ${{ inputs.path }}
+        INCLUDE_HIDDEN_FILES: ${{ inputs.include-hidden-files }}
 
     # Switch to gtar (GNU tar instead of bsdtar which is the default in the MacOS runners so we can use --hard-dereference)
     - name: Archive artifact
@@ -54,11 +55,12 @@ runs:
           -cvf "$RUNNER_TEMP/artifact.tar" \
           --exclude=.git \
           --exclude=.github \
-          ${{ inputs.include-hidden-files != 'true' && '--exclude=.[^/]*' || '' }} \
+          $( [ "$INCLUDE_HIDDEN_FILES" != 'true' ] && echo '--exclude=.[^/]*' || echo '' ) \
           .
         echo ::endgroup::
       env:
         INPUT_PATH: ${{ inputs.path }}
+        INCLUDE_HIDDEN_FILES: ${{ inputs.include-hidden-files }}
 
     # Massage the paths for Windows only
     - name: Archive artifact
@@ -72,12 +74,13 @@ runs:
           -cvf "$RUNNER_TEMP\artifact.tar" \
           --exclude=.git \
           --exclude=.github \
-          ${{ inputs.include-hidden-files != 'true' && '--exclude=.[^/]*' || '' }} \
+          $( [ "$INCLUDE_HIDDEN_FILES" != 'true' ] && echo '--exclude=.[^/]*' || echo '' ) \
           --force-local \
           "."
         echo ::endgroup::
       env:
         INPUT_PATH: ${{ inputs.path }}
+        INCLUDE_HIDDEN_FILES: ${{ inputs.include-hidden-files }}
 
     - name: Upload artifact
       id: upload-artifact
