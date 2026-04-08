@@ -48,6 +48,7 @@ jobs:
 | `name`           | `false`   | `github-pages` | Artifact name                                      |
 | `path`           | `true`    | `_site/`       | Path of the directory containing the static assets |
 | `retention-days` | `false`   | `1`            | Duration after which artifact will expire in days  |
+| `include-hidden-files` | `false` | `false`  | Include hidden files and directories (those starting with a dot) in the artifact. Excludes `.git` and `.github` regardless. |
 
 ### Outputs 📤
 
