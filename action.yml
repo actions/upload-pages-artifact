@@ -63,7 +63,7 @@ runs:
         INPUT_PATH: ${{ inputs.path }}
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # 3.1.3
       with:
         name: ${{ inputs.name }}
         path: ${{ runner.temp }}/artifact.tar
