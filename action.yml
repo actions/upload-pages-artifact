@@ -81,7 +81,7 @@ runs:
 
     - name: Upload artifact
       id: upload-artifact
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      uses: KirilsTurkins/lsf-upload-artifact@5c42799caf30eda69cb2db5da0be2400c47cef16 # v7.0.2 + repaired deepmerge source
       with:
         name: ${{ inputs.name }}
         path: ${{ runner.temp }}/artifact.tar
